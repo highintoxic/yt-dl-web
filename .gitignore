@@ -1,3 +1,4 @@
 **/node_modules
 **/yarn.lock
-**/yarn-error.log   
+**/yarn-error.log
+my-app
