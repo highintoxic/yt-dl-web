@@ -5,6 +5,11 @@ const ytdl = require('./ytdl');
 const cors = require('cors');
 
 app.use(cors());
+app.use(express.static('./build'))
+
+app.get('/', (req, res) => {
+    res.sendFile('./build/index.html')
+})
 
 app.use('/download', ytdl);
 app.use('/query', ytsr);
