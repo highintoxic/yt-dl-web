@@ -77,7 +77,7 @@ export const App = () => {
         <Image src={r.bestThumbnail.url} w="20%" rounded="md" justifySelf="left" fit="contain" />
         <Grid flex="auto" templateRows="30% 70%">
           <GridItem rowStart={1} rowEnd={2} justifySelf="center" alignSelf="center">
-            <Text fontSize="lg" >{r.title}</Text>
+            <Text fontSize="lg" isTruncated>{r.title}</Text>
           </GridItem>
           <GridItem rowStart={2} rowEnd={3} justifySelf="center" alignSelf="center">
             <Stack spacing="0.5rem" direction="row" align="center">
