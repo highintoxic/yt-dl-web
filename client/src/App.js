@@ -44,6 +44,7 @@ export const App = () => {
     name = name.replace('|','').toString('ascii')
     console.log(id)
     fetch('https://yt-dl-server.highintoxic.repl.co/download?id=' + encodeURI(id),{
+      mode: 'no-cors',
       method: "get",
       headers: {
         'Content-Disposition': `attachment; filename="${name}.mp3"`,
