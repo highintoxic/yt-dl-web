@@ -25,7 +25,7 @@ export const App = () => {
   useEffect(() => {
     const timeoutID = setTimeout(() => {
       const params = encodeURI(query)
-      fetch('https://localhost:4000/query?q=' + params)
+      fetch('https://yt-dl-server.highintoxic.repl.co/query?q=' + params)
         .then(res => res.json())
         .then(res => {
           setLoading(false)
@@ -42,7 +42,7 @@ export const App = () => {
 
   const onAudioClick = (id) => {
     console.log(id)
-    fetch('https://localhost:4000/download?id=' + encodeURI(id),{
+    fetch('https://yt-dl-server.highintoxic.repl.co/download?id=' + encodeURI(id),{
       mode: 'no-cors',
       method: "get",
       headers: {
