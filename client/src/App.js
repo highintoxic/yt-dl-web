@@ -74,7 +74,7 @@ export const App = () => {
     else return (
       results.map(r => (
       <Box boxSize="sm" w="100%" bg="#318097" borderWidth="1px" borderRadius="lg" overflow="hidden" h="min-content" display="flex" flexDirection="row">
-        <Image src={r.bestThumbnail.url} w="20%" rounded="md" justifySelf="left" fit="contain" />
+        <Image src={r.bestThumbnail.url || r.thumbnails[0].url || r.thumbnails[1].url} w="20%" rounded="md" justifySelf="left" fit="contain" alt="Loading..." />
         <Grid flex="auto" templateRows="30% 70%">
           <GridItem rowStart={1} rowEnd={2} justifySelf="center" alignSelf="center">
             <Text fontSize="lg" isTruncated>{r.title}</Text>
