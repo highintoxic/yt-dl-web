@@ -46,10 +46,17 @@ export const App = () => {
       mode: 'no-cors',
       method: "get",
       headers: {
-        "Content-Type": "application/mp3"
+        "Content-Type": "audio/mpeg"
       }
     })
-      .then(res => console.log(res))
+      .then(res => res.blob().then(blob => {
+
+        let url = window.URL.createObjectURL(blob);
+        let a = document.createElement('a');
+        a.href = url;
+        //a.download = '';
+        a.click();
+      }))
   }
   
   const ResultRender = () => {
