@@ -40,23 +40,30 @@ export const App = () => {
   }, [query])
 
 
-  const onAudioClick = (id) => {
+  const onAudioClick = (id, name) => {
+    name = name.replace('|','').toString('ascii')
     console.log(id)
     fetch('https://yt-dl-server.highintoxic.repl.co/download?id=' + encodeURI(id),{
-      mode: 'no-cors',
       method: "get",
       headers: {
+        'Content-Disposition': `attachment; filename="${name}.mp3"`,
         "Content-Type": "audio/mpeg"
       }
     })
-      .then(res => res.blob().then(blob => {
-
-        let url = window.URL.createObjectURL(blob);
-        let a = document.createElement('a');
-        a.href = url;
-        //a.download = '';
-        a.click();
-      }))
+      .then(res => res.blob())
+      .then(blob => {
+        // 2. Create blob link to download
+        const url = window.URL.createObjectURL(new Blob([blob]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', name + '.mp3');
+        // 3. Append to html page
+        document.body.appendChild(link);
+        // 4. Force download
+        link.click();
+        // 5. Clean up and remove the link
+        link.parentNode.removeChild(link);
+      })
   }
   
   const ResultRender = () => {
@@ -74,7 +81,7 @@ export const App = () => {
           </GridItem>
           <GridItem rowStart={2} rowEnd={3} justifySelf="center" alignSelf="center">
             <Stack spacing="0.5rem" direction="row" align="center">
-              <Button colorScheme="teal" w="7rem" size="sm" onClick={() => onAudioClick(r.url)}>MP3 - Audio</Button>
+              <Button colorScheme="teal" w="7rem" size="sm" onClick={() => onAudioClick(r.url, r.title)}>MP3 - Audio</Button>
               <Button colorScheme="teal" w="7rem" size="sm">MP4 - Video</Button>
             </Stack>
           </GridItem>
